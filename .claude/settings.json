@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx eslint --fix \"${file}\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"if(process.env.CLAUDE_TOOL_INPUT_PATH?.includes('.env')) { console.error('Blocked: direct .env edits are not allowed. Edit .env manually.'); process.exit(2); }\""
+          }
+        ]
+      }
+    ]
+  }
+}
