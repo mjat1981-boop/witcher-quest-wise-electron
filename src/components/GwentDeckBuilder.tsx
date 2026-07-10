@@ -167,7 +167,10 @@ export function GwentDeckBuilder() {
   const loadDeck = useCallback((deck: SavedDeck) => {
     setFaction(deck.faction);
     setLeaderId(deck.leaderId);
-    setDeckCardIds(deck.cardIds);
+    // Drop ids that no longer exist in the card data; a stale id would make
+    // the rendered deck indices disagree with deckCardIds, so removeCard
+    // would delete the wrong card.
+    setDeckCardIds(deck.cardIds.filter(id => gwentCards.some(c => c.id === id)));
     setDeckName("");
     setCardFilter("");
   }, []);
