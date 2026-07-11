@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  vitest:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,10 +16,14 @@ jobs:
           node-version: 22
           cache: npm
 
-      # --legacy-peer-deps: @vitejs/plugin-react-swc's peer range conflicts
-      # with the pinned vite version (see TESTING.md).
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
 
       - name: Run tests
         run: npm test
