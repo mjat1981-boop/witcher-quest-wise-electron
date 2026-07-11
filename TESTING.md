@@ -15,8 +15,8 @@ Vitest is configured in `vitest.config.ts`: `jsdom` environment, global test
 APIs, and `src/test/setup.ts` for `@testing-library/jest-dom` matchers plus a
 `matchMedia` shim. It picks up any `*.test.ts(x)` / `*.spec.ts(x)` under `src/`.
 
-> Installing deps may need `npm install --legacy-peer-deps` due to a Vite peer
-> range on `@vitejs/plugin-react-swc`.
+CI (`.github/workflows/test.yml`) runs `npm run lint`, `npm run typecheck`,
+and `npm test` on every PR and push to main.
 
 ## What's covered today
 
